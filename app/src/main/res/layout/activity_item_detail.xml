@@ -1,15 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    >
 
     <!-- Display item details -->
+    <TextView
+        android:id="@+id/tvItemTypeLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Type"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"/>
+    <TextView
+        android:id="@+id/tvItemType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Item Name"
+        android:layout_below="@id/tvItemTypeLabel"/>
+
+    <TextView
+        android:id="@+id/tvItemNameLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Name"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/tvItemType"/>
     <TextView
         android:id="@+id/tvItemName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Item Name"
-        android:layout_marginTop="20dp"/>
+        android:layout_below="@id/tvItemNameLabel"/>
+
+    <TextView
+        android:id="@+id/tvItemPhoneLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Phone"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/tvItemName"/>
+    <TextView
+        android:id="@+id/tvItemPhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Item Name"
+        android:layout_below="@id/tvItemPhoneLabel"/>
+
+    <TextView
+        android:id="@+id/tvItemDescriptionLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Description"
+        android:layout_below="@id/tvItemPhone"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp" />
+    <TextView
+        android:id="@+id/tvItemDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Item Name"
+        android:layout_below="@id/tvItemDescriptionLabel"/>
+
+    <TextView
+        android:id="@+id/tvItemLocationLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Location"
+        android:layout_below="@id/tvItemDescription"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp" />
+    <TextView
+        android:id="@+id/tvItemLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Item Name"
+        android:layout_below="@id/tvItemLocationLabel"/>
+
+    <TextView
+        android:id="@+id/tvItemDateLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Date"
+        android:layout_below="@id/tvItemLocation"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp" />
+    <TextView
+        android:id="@+id/tvItemDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Item Name"
+        android:layout_below="@id/tvItemDateLabel"/>
 
     <!-- Add other TextViews for displaying item details -->
 
@@ -18,8 +102,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Delete"
-        android:layout_below="@id/tvItemName"
+        android:layout_below="@id/tvItemDate"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="20dp"
+        />
 
 </RelativeLayout>

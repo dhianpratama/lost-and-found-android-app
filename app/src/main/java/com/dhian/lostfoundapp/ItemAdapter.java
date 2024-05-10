@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,16 +15,16 @@ import java.util.List;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> {
 
-    private List<Item> taskList;
+    private List<Item> itemList;
     Context context;
     private ItemController itemController;
 
-    public void setTaskList(List<Item> itemList) {
-        this.taskList = itemList;
+    public void setItemList(List<Item> itemList) {
+        this.itemList = itemList;
     }
 
     public ItemAdapter(List<Item> items, Context context) {
-        this.taskList = items;
+        this.itemList = items;
         this.context = context;
         itemController = new ItemController(this.context);
     }
@@ -39,13 +38,29 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, @SuppressLint("RecyclerView") int i) {
-        Item task = taskList.get(i);
+        Item task = itemList.get(i);
 
         String name = task.getName();
         String postType = task.getPost_type();
         String location = task.getLocation();
         String itemDescription = postType + ": " + name + " in " + location;
         myViewHolder.description.setText(String.valueOf(itemDescription));
+
+        myViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Item taskSelected = itemList.get(i);
+                Intent intent = new Intent(context, ItemDetailActivity.class);
+                intent.putExtra("id", taskSelected.getId());
+                intent.putExtra("name", taskSelected.getName());
+                intent.putExtra("description", taskSelected.getDescription());
+                intent.putExtra("phone", taskSelected.getPhone());
+                intent.putExtra("post_type", taskSelected.getPost_type());
+                intent.putExtra("location", taskSelected.getLocation());
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
+            }
+        });
     }
 
     private void updateView() {
@@ -54,7 +69,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
 
     @Override
     public int getItemCount() {
-        return taskList.size();
+        return itemList.size();
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {

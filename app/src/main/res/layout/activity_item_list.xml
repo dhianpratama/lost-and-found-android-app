@@ -10,6 +10,8 @@
         android:text="Lost and Found Items"
         android:gravity="center"
         android:layout_marginTop="20dp"
+        android:textStyle="bold"
+        android:textSize="24dp"
         tools:ignore="MissingConstraints" />
 
     <ScrollView

@@ -17,7 +17,7 @@ public class ItemController {
         dataBaseHelper = new DataBaseHelper(contexto);
     }
 
-    public long newTask(Item task) {
+    public long newItem(Item task) {
         SQLiteDatabase dataBase = dataBaseHelper.getWritableDatabase();
         ContentValues valuesForInsert = new ContentValues();
         valuesForInsert.put("name", task.getName());
@@ -29,7 +29,13 @@ public class ItemController {
         return dataBase.insert(TABLE_NAME, null, valuesForInsert);
     }
 
-    public ArrayList<Item> getTasks() {
+    public int deleteItem(String id) {
+        SQLiteDatabase dataBase = dataBaseHelper.getWritableDatabase();
+        String[] args = {String.valueOf(id)};
+        return dataBase.delete(TABLE_NAME, "name = ?", args);
+    }
+
+    public ArrayList<Item> getItems() {
         ArrayList<Item> tasks = new ArrayList<>();
         SQLiteDatabase baseDeDatos = dataBaseHelper.getReadableDatabase();
         String[] fields = {"name", "phone", "description", "id", "date", "location", "post_type"};

@@ -1,10 +1,8 @@
 package com.dhian.lostfoundapp;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -19,8 +17,8 @@ import com.dhian.lostfoundapp.databinding.ActivityItemListBinding;
 public class ItemListActivity extends AppCompatActivity {
     private List<Item> taskList;
     private RecyclerView recyclerView;
-    private ItemAdapter taskAdapter;
-    private ItemController taskController;
+    private ItemAdapter itemAdapter;
+    private ItemController itemController;
 //    private AppBarConfiguration appBarConfiguration;
     private ActivityItemListBinding binding;
 
@@ -33,20 +31,19 @@ public class ItemListActivity extends AppCompatActivity {
 
 //        setSupportActionBar(binding);
 
-        taskController = new ItemController(ItemListActivity.this);
+        itemController = new ItemController(ItemListActivity.this);
 
         recyclerView = findViewById(R.id.recyclerViewItems);
 
 
         taskList = new ArrayList<>();
-        taskAdapter = new ItemAdapter(taskList, getApplicationContext());
+        itemAdapter = new ItemAdapter(taskList, getApplicationContext());
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(taskAdapter);
+        recyclerView.setAdapter(itemAdapter);
 
         refreshList();
-
     }
 
     @Override
@@ -78,9 +75,9 @@ public class ItemListActivity extends AppCompatActivity {
     }
 
     public void refreshList() {
-        if (taskAdapter == null) return;
-        taskList = taskController.getTasks();
-        taskAdapter.setTaskList(taskList);
-        taskAdapter.notifyDataSetChanged();
+        if (itemAdapter == null) return;
+        taskList = itemController.getItems();
+        itemAdapter.setItemList(taskList);
+        itemAdapter.notifyDataSetChanged();
     }
 }

@@ -12,8 +12,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.io.Console;
-
 public class CreateAdvertActivity extends AppCompatActivity {
 
     private ItemController itemController;
@@ -77,7 +75,7 @@ public class CreateAdvertActivity extends AppCompatActivity {
                 String name = etName.getText().toString();
                 String postType = "";
                 if (rbFound.isChecked()) {
-                    postType = "Post";
+                    postType = "Found";
                 } else if (rbLost.isChecked()) {
                     postType = "Lost";
                 }
@@ -87,10 +85,11 @@ public class CreateAdvertActivity extends AppCompatActivity {
                 String location = etLocation.getText().toString();
 
                 Item newTask = new Item(name, postType, phone, description, date, location );
-                long id = itemController.newTask(newTask);
+                long id = itemController.newItem(newTask);
                 if (id == -1) {
                     Toast.makeText(CreateAdvertActivity.this, "Error saving. Try again", Toast.LENGTH_SHORT).show();
                 } else {
+                    Toast.makeText(CreateAdvertActivity.this, "Item successfully added", Toast.LENGTH_SHORT).show();
                     finish();
                 }
             }
