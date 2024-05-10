@@ -12,6 +12,16 @@ public class Item {
         this.location = location;
     }
 
+    public Item(long id, String name, String post_type, String phone, String description, String date, String location) {
+        this.id = id;
+        this.post_type = post_type;
+        this.name = name;
+        this.phone = phone;
+        this.description = description;
+        this.date = date;
+        this.location = location;
+    }
+
     public long getId() {
         return id;
     }

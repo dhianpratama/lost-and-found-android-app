@@ -33,7 +33,7 @@
 
             <!--adding a radio button -->
             <RadioButton
-                android:id="@+id/javaRB"
+                android:id="@+id/rbLost"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -45,7 +45,7 @@
 
             <!--adding a radio button -->
             <RadioButton
-                android:id="@+id/cRB"
+                android:id="@+id/rbFound"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

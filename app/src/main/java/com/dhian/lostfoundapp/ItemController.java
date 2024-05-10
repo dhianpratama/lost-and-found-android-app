@@ -17,38 +17,22 @@ public class ItemController {
         dataBaseHelper = new DataBaseHelper(contexto);
     }
 
-
-    public int deleteTask(Item task) {
-
-        SQLiteDatabase dataBase = dataBaseHelper.getWritableDatabase();
-        String[] args = {String.valueOf(task.getId())};
-        return dataBase.delete(TABLE_NAME, "id = ?", args);
-    }
-
     public long newTask(Item task) {
         SQLiteDatabase dataBase = dataBaseHelper.getWritableDatabase();
         ContentValues valuesForInsert = new ContentValues();
         valuesForInsert.put("name", task.getName());
+        valuesForInsert.put("phone", task.getPhone());
         valuesForInsert.put("description", task.getDescription());
+        valuesForInsert.put("post_type", task.getPost_type());
         valuesForInsert.put("date", task.getDate());
+        valuesForInsert.put("location", task.getLocation());
         return dataBase.insert(TABLE_NAME, null, valuesForInsert);
-    }
-
-    public int saveChanges(Item taskEdited) {
-        SQLiteDatabase dataBase = dataBaseHelper.getWritableDatabase();
-        ContentValues valuesForUpdate = new ContentValues();
-        valuesForUpdate.put("name", taskEdited.getName());
-        valuesForUpdate.put("description", taskEdited.getDescription());
-        valuesForUpdate.put("date", taskEdited.getDate());
-        String fieldForUpdate = "id = ?";
-        String[] argsForUpdate = {String.valueOf(taskEdited.getId())};
-        return dataBase.update(TABLE_NAME, valuesForUpdate, fieldForUpdate, argsForUpdate);
     }
 
     public ArrayList<Item> getTasks() {
         ArrayList<Item> tasks = new ArrayList<>();
         SQLiteDatabase baseDeDatos = dataBaseHelper.getReadableDatabase();
-        String[] fields = {"title", "description", "id", "dueDate"};
+        String[] fields = {"name", "phone", "description", "id", "date", "location", "post_type"};
         Cursor cursor = baseDeDatos.query(
                 TABLE_NAME,
                 fields,
@@ -56,7 +40,7 @@ public class ItemController {
                 null,
                 null,
                 null,
-                "dueDate"
+                "date"
         );
 
         if (cursor == null) {
@@ -67,11 +51,14 @@ public class ItemController {
 
 
         do {
-            String title = cursor.getString(0);
-            String description = cursor.getString(1);
-            long id = cursor.getLong(2);
-            String dueDate = cursor.getString(3);
-            Item taskGetFromDB = new Item(title, title, title, title, description, dueDate);
+            String name = cursor.getString(0);
+            String phone = cursor.getString(1);
+            String description = cursor.getString(2);
+            long id = cursor.getLong(3);
+            String date = cursor.getString(4);
+            String location = cursor.getString(5);
+            String post_type = cursor.getString(6);
+            Item taskGetFromDB = new Item(id, name, post_type, phone, description, date, location);
             tasks.add(taskGetFromDB);
         } while (cursor.moveToNext());
 

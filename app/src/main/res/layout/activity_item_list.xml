@@ -18,7 +18,7 @@
         android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerViewTasks"
+            android:id="@+id/recyclerViewItems"
             android:layout_width="match_parent"
             tools:listitem="@layout/item_lost_found"
             android:layout_height="match_parent" />

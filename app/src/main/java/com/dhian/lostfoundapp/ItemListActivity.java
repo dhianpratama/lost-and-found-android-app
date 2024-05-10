@@ -35,7 +35,7 @@ public class ItemListActivity extends AppCompatActivity {
 
         taskController = new ItemController(ItemListActivity.this);
 
-        recyclerView = findViewById(R.id.recyclerViewTasks);
+        recyclerView = findViewById(R.id.recyclerViewItems);
 
 
         taskList = new ArrayList<>();

@@ -41,37 +41,11 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, @SuppressLint("RecyclerView") int i) {
         Item task = taskList.get(i);
 
-        String title = task.getName();
-        String description = task.getDescription();
-        String dueDate = task.getDate();
-        myViewHolder.title.setText(title);
-        myViewHolder.description.setText(String.valueOf(description));
-        myViewHolder.dueDate.setText("Due date " + dueDate);
-        myViewHolder.ivEdit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Item taskSelected = taskList.get(i);
-                Intent intent = new Intent(context, ItemDetailActivity.class);
-                intent.putExtra("id", taskSelected.getId());
-                intent.putExtra("name", taskSelected.getName());
-                intent.putExtra("description", taskSelected.getDescription());
-                intent.putExtra("date", taskSelected.getDate());
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                context.startActivity(intent);
-            }
-        });
-
-        myViewHolder.ivDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final Item taskToDelete = taskList.get(i);
-                taskList.remove(i);
-                itemController.deleteTask(taskToDelete);
-                updateView();
-
-            }
-        });
-
+        String name = task.getName();
+        String postType = task.getPost_type();
+        String location = task.getLocation();
+        String itemDescription = postType + ": " + name + " in " + location;
+        myViewHolder.description.setText(String.valueOf(itemDescription));
     }
 
     private void updateView() {
@@ -84,9 +58,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView title, description, dueDate;
-        ImageView ivEdit;
-        ImageView ivDelete;
+        TextView description;
 
         MyViewHolder(View itemView) {
             super(itemView);

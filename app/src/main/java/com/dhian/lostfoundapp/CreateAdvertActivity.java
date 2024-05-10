@@ -6,11 +6,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.Console;
+
 public class CreateAdvertActivity extends AppCompatActivity {
+
+    private ItemController itemController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +26,14 @@ public class CreateAdvertActivity extends AppCompatActivity {
         Button btnSave = findViewById(R.id.btnSave);
         EditText etName = findViewById(R.id.etName);
         EditText etDate = findViewById(R.id.etDate);
+        EditText etPhone = findViewById(R.id.etPhone);
+        EditText etDescription = findViewById(R.id.etDescription);
+        EditText etLocation = findViewById(R.id.etLocation);
+        RadioButton rbFound = findViewById(R.id.rbFound);
+        RadioButton rbLost = findViewById(R.id.rbLost);
+
+        itemController = new ItemController(CreateAdvertActivity.this);
+
         // Initialize other EditText fields
 
         etDate.setOnClickListener(new View.OnClickListener() {
@@ -33,8 +47,26 @@ public class CreateAdvertActivity extends AppCompatActivity {
                         etDate.setText(selectedDate);
                     }
                 });
-
                 newFragment.show(getSupportFragmentManager(), "datePicker");
+            }
+        });
+
+        RadioGroup yourRadioGroup = (RadioGroup) findViewById(R.id.radioGroup);
+
+
+        yourRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+        {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId)
+            {
+                if (checkedId == R.id.rbFound) {
+                    System.out.println("FOUND CHECKED");
+                } else if (checkedId == R.id.rbLost) {
+                    System.out.println("LOST CHECKED");
+                }
+
+                System.out.println(group);
+                System.out.println(checkedId);
             }
         });
 
@@ -43,13 +75,24 @@ public class CreateAdvertActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // Get data from EditText fields
                 String name = etName.getText().toString();
-                // Get data from other EditText fields
+                String postType = "";
+                if (rbFound.isChecked()) {
+                    postType = "Post";
+                } else if (rbLost.isChecked()) {
+                    postType = "Lost";
+                }
+                String phone = etPhone.getText().toString();
+                String description = etDescription.getText().toString();
+                String date = etDate.getText().toString();
+                String location = etLocation.getText().toString();
 
-                // Save data to SQLite database
-                // Code to save data to SQLite database goes here
-
-                Toast.makeText(CreateAdvertActivity.this, "Advert saved successfully", Toast.LENGTH_SHORT).show();
-                finish(); // Close the activity after saving
+                Item newTask = new Item(name, postType, phone, description, date, location );
+                long id = itemController.newTask(newTask);
+                if (id == -1) {
+                    Toast.makeText(CreateAdvertActivity.this, "Error saving. Try again", Toast.LENGTH_SHORT).show();
+                } else {
+                    finish();
+                }
             }
         });
     }
