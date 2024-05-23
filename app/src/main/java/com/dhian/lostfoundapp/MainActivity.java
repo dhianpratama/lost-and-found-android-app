@@ -7,6 +7,8 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.libraries.places.api.Places;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -16,6 +18,8 @@ public class MainActivity extends AppCompatActivity {
 
         Button btnCreateAdvert = findViewById(R.id.btnCreateAdvert);
         Button btnShowItems = findViewById(R.id.btnShowItems);
+
+        Places.initialize(this, String.valueOf(R.string.GEO_API_KEY));
 
         btnCreateAdvert.setOnClickListener(new View.OnClickListener() {
             @Override

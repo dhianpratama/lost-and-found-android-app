@@ -3,16 +3,18 @@ package com.dhian.lostfoundapp;
 public class Item {
     private long id;
 
-    public Item(String name, String post_type, String phone, String description, String date, String location) {
+    public Item(String name, String post_type, String phone, String description, String date, String location, double latitude, double longitude) {
         this.post_type = post_type;
         this.name = name;
         this.phone = phone;
         this.description = description;
         this.date = date;
         this.location = location;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
-    public Item(long id, String name, String post_type, String phone, String description, String date, String location) {
+    public Item(long id, String name, String post_type, String phone, String description, String date, String location, double latitude, double longitude) {
         this.id = id;
         this.post_type = post_type;
         this.name = name;
@@ -20,6 +22,8 @@ public class Item {
         this.description = description;
         this.date = date;
         this.location = location;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
     public long getId() {
@@ -84,4 +88,24 @@ public class Item {
     private String description;
     private String date;
     private String location;
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    private double latitude;
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    private double longitude;
 }

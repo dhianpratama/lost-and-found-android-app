@@ -26,6 +26,8 @@ public class ItemController {
         valuesForInsert.put("post_type", task.getPost_type());
         valuesForInsert.put("date", task.getDate());
         valuesForInsert.put("location", task.getLocation());
+        valuesForInsert.put("latitude", task.getLatitude());
+        valuesForInsert.put("longitude", task.getLongitude());
         return dataBase.insert(TABLE_NAME, null, valuesForInsert);
     }
 
@@ -38,7 +40,7 @@ public class ItemController {
     public ArrayList<Item> getItems() {
         ArrayList<Item> tasks = new ArrayList<>();
         SQLiteDatabase baseDeDatos = dataBaseHelper.getReadableDatabase();
-        String[] fields = {"name", "phone", "description", "id", "date", "location", "post_type"};
+        String[] fields = {"name", "phone", "description", "id", "date", "location", "post_type", "latitude", "longitude"};
         Cursor cursor = baseDeDatos.query(
                 TABLE_NAME,
                 fields,
@@ -64,7 +66,9 @@ public class ItemController {
             String date = cursor.getString(4);
             String location = cursor.getString(5);
             String post_type = cursor.getString(6);
-            Item taskGetFromDB = new Item(id, name, post_type, phone, description, date, location);
+            double latitude = cursor.getDouble(7);
+            double longitude = cursor.getDouble(8);
+            Item taskGetFromDB = new Item(id, name, post_type, phone, description, date, location, latitude, longitude);
             tasks.add(taskGetFromDB);
         } while (cursor.moveToNext());
 

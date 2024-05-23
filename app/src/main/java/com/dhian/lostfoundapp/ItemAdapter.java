@@ -57,6 +57,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
                 intent.putExtra("phone", taskSelected.getPhone());
                 intent.putExtra("post_type", taskSelected.getPost_type());
                 intent.putExtra("location", taskSelected.getLocation());
+                intent.putExtra("date", taskSelected.getDate());
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
             }

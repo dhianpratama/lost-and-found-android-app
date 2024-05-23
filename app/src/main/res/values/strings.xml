@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Lost Found App</string>
+    <string name="GEO_API_KEY">AIzaSyCLwH8vWHs1hxHe0fGBIcXY_2Doc1msF3k</string>
 </resources>
