@@ -55,6 +55,7 @@ public class CreateAdvertActivity extends AppCompatActivity {
         }
     }
 
+    // Handler when user get address from current location
     private void getCurrentLocation() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -67,9 +68,7 @@ public class CreateAdvertActivity extends AppCompatActivity {
                     Location location = task.getResult();
                     latitude = location.getLatitude();
                     longitude = location.getLongitude();
-                    // Use the latitude and longitude as needed, e.g., display them or save them
                     etLocation.setText(getAddressFromLocation(latitude, longitude));
-                    System.out.println("LOCATION::: " + latitude + " and " + longitude);
                 } else {
                     // Handle the case where location is null
                 }
@@ -115,7 +114,6 @@ public class CreateAdvertActivity extends AppCompatActivity {
 
         RadioGroup yourRadioGroup = (RadioGroup) findViewById(R.id.radioGroup);
 
-
         yourRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
         {
             @Override
@@ -136,7 +134,7 @@ public class CreateAdvertActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Set the fields to specify which types of place data to return
-                List<Place.Field> fields = Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.ADDRESS);
+                List<Place.Field> fields = Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.ADDRESS, Place.Field.LAT_LNG);
 
                 // Start the autocomplete intent
                 Intent intent = new Autocomplete.IntentBuilder(AutocompleteActivityMode.OVERLAY, fields)
@@ -173,15 +171,14 @@ public class CreateAdvertActivity extends AppCompatActivity {
         });
 
         btnGetCurrentLocation.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
-                System.out.println(">>> GET CURRENT LOCATION <<<");
                 requestLocationPermission();
             }
         });
     }
 
+    // Handler when user choose address from the map
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -190,8 +187,8 @@ public class CreateAdvertActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 Place place = Autocomplete.getPlaceFromIntent(data);
                 etLocation.setText(place.getName() + ", " + place.getAddress());
-                latitude = Objects.requireNonNull(place.getLatLng()).latitude;
-                longitude = Objects.requireNonNull(place.getLatLng()).longitude;
+                latitude = place.getLatLng().latitude;
+                longitude = place.getLatLng().longitude;
             } else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
                 Toast.makeText(this, "Error: " + Autocomplete.getStatusFromIntent(data).getStatusMessage(), Toast.LENGTH_LONG).show();
             } else if (resultCode == RESULT_CANCELED) {
@@ -200,6 +197,7 @@ public class CreateAdvertActivity extends AppCompatActivity {
         }
     }
 
+    // Reverse geocoding to get address by coordinate
     private String getAddressFromLocation(double latitude, double longitude) {
         Geocoder geocoder = new Geocoder(this, Locale.getDefault());
         try {
