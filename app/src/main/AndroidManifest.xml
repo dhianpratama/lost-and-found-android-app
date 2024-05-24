@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
@@ -18,7 +19,7 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="YOUR_API_KEY" />
+            android:value="AIzaSyCLwH8vWHs1hxHe0fGBIcXY_2Doc1msF3k" />
 
         <activity
             android:name=".ItemDetailActivity"
@@ -28,6 +29,9 @@
             android:exported="false" />
         <activity
             android:name=".CreateAdvertActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MapsActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

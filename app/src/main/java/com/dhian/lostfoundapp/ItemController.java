@@ -13,8 +13,8 @@ public class ItemController {
     private DataBaseHelper dataBaseHelper;
     private String TABLE_NAME = "items";
 
-    public ItemController(Context contexto) {
-        dataBaseHelper = new DataBaseHelper(contexto);
+    public ItemController(Context context) {
+        dataBaseHelper = new DataBaseHelper(context);
     }
 
     public long newItem(Item task) {

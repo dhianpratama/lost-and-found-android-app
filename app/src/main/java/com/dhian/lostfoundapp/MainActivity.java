@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
         Button btnCreateAdvert = findViewById(R.id.btnCreateAdvert);
         Button btnShowItems = findViewById(R.id.btnShowItems);
+        Button btnShowMaps = findViewById(R.id.btnShowMaps);
 
         Places.initialize(this, String.valueOf(R.string.GEO_API_KEY));
 
@@ -33,6 +34,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, ItemListActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btnShowMaps.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, MapsActivity.class);
                 startActivity(intent);
             }
         });

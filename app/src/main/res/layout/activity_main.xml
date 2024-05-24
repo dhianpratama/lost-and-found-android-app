@@ -22,4 +22,14 @@
         android:layout_marginTop="20dp"
         android:width="250dp" />
 
+    <Button
+        android:id="@+id/btnShowMaps"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Show Maps"
+        android:layout_below="@id/btnShowItems"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:width="250dp" />
+
 </RelativeLayout>
